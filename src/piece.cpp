@@ -1,5 +1,6 @@
 #include "piece.hpp"
 #include <cstdio>
+#include <cmath>
 
 //Let's try making the pieces only use one bit per block
 //Only works with C++14
@@ -48,29 +49,33 @@ void SpawnPiece(PieceType type)
     0b00000000,
     0b00000000
     };
-    unsigned char rotation;
+
+//    BlockType color = (BlockType)(rand()%(BLOCKTYPE_MAX-1) +1);
+
     switch(type)
     {
     case PIECE_T:
         SetOrigin(origin, 2, 1);
         break;
     case PIECE_B:
-        SetOrigin(origin, 3, 1);
+        SetOrigin(origin, 3, 0);
         break;
     case PIECE_S:
-        SetOrigin(origin, 2, 1);
+        SetOrigin(origin, 3, 0);
         break;
     case PIECE_RS:
-        SetOrigin(origin, 3, 1);
+        SetOrigin(origin, 3, 0);
         break;
     case PIECE_L:
-        SetOrigin(origin, 4, 0);
+        SetOrigin(origin, 3, 0);
         break;
     case PIECE_RL:
-        SetOrigin(origin, 2, 0);
+        SetOrigin(origin, 3, 0);
         break;
     case PIECE_I:
-        SetOrigin(origin, 2, 0);
+        SetOrigin(origin, 3, 0);
         break;
     }
+
+
 }
