@@ -61,3 +61,47 @@
 	"piece.hpp"
 	<cstdio>
 
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\blocks.cpp
+	"blocks.hpp"
+	"grid.hpp"
+	"renderer.hpp"
+	"cmath"
+	"window.hpp"
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
+	"event.hpp"
+	"grid.hpp"
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\grid.cpp
+	"grid.hpp"
+	"renderer.hpp"
+	"window.hpp"
+	"blocks.hpp"
+	<cstdio>
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
+	<cstdio>
+	<SDL2/SDL.h>
+	"window.hpp"
+	"event.hpp"
+	"renderer.hpp"
+	"grid.hpp"
+	"blocks.hpp"
+	"piece.hpp"
+	<ctime>
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
+	"piece.hpp"
+	<cstdio>
+	<cmath>
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\renderer.cpp
+	"renderer.hpp"
+	"window.hpp"
+	"grid.hpp"
+	"blocks.hpp"
+	<cstdio>
+
+1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\window.cpp
+	"window.hpp"
+
