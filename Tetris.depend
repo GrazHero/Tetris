@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1537418512 source:/home/shannon/Documents/Tetris/src/main.cpp
+1537595228 source:/home/shannon/Documents/Tetris/src/main.cpp
 	<cstdio>
 	<SDL2/SDL.h>
 	"window.hpp"
@@ -9,6 +9,7 @@
 	"blocks.hpp"
 	"piece.hpp"
 	<ctime>
+	<cmath>
 
 1537317781 /home/shannon/Documents/Tetris/include/window.hpp
 	<SDL2/SDL.h>
@@ -16,9 +17,10 @@
 1537415234 source:/home/shannon/Documents/Tetris/src/window.cpp
 	"window.hpp"
 
-1537413030 source:/home/shannon/Documents/Tetris/src/event.cpp
+1537598133 source:/home/shannon/Documents/Tetris/src/event.cpp
 	"event.hpp"
 	"grid.hpp"
+	"game.hpp"
 
 1537406008 /home/shannon/Documents/Tetris/include/event.hpp
 	<SDL2/SDL.h>
@@ -45,21 +47,25 @@
 	<SDL2/SDL.h>
 	"blocks.hpp"
 
-1537419284 source:/home/shannon/Documents/Tetris/src/blocks.cpp
+1537595228 source:/home/shannon/Documents/Tetris/src/blocks.cpp
 	"blocks.hpp"
 	"grid.hpp"
 	"renderer.hpp"
 	"cmath"
 	"window.hpp"
+	<cstdlib>
 
 1537414736 /home/shannon/Documents/Tetris/include/blocks.hpp
 
-1537418418 /home/shannon/Documents/Tetris/include/piece.hpp
+1537595228 /home/shannon/Documents/Tetris/include/piece.hpp
 	"blocks.hpp"
 
-1537418881 source:/home/shannon/Documents/Tetris/src/piece.cpp
+1537599537 source:/home/shannon/Documents/Tetris/src/piece.cpp
 	"piece.hpp"
+	"grid.hpp"
 	<cstdio>
+	<cmath>
+	<cstdlib>
 
 1537590425 source:c:\users\fog\desktop\newtetris\tetris\src\blocks.cpp
 	"blocks.hpp"
@@ -456,4 +462,18 @@
 	"piece.hpp"
 	<cstdlib>
 	<cstdio>
+
+1537595228 /home/shannon/Documents/Tetris/include/game.hpp
+
+1537595228 source:/home/shannon/Documents/Tetris/src/game.cpp
+	"game.hpp"
+	"blocks.hpp"
+	"piece.hpp"
+	<cstdlib>
+	<cstdio>
+
+1537596591 source:/home/shannon/Documents/Tetris/src/new.cpp
+	<cstdio>
+
+1537596591 source:/home/shannon/Documents/Tetris/src/test.cpp
 

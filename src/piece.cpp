@@ -43,7 +43,9 @@ unsigned char piece_i[] = {
 
 void SetOrigin(unsigned char& orig, int x)
 {
-    orig = 0b10000000 >> x;
+    printf("original origin: %d\n", orig);
+    orig = (0b10000000 >> x);
+    printf("new origin: %d\n", orig);
 }
 
 void SpawnPiece(PieceType type, BlockType color)
@@ -89,13 +91,19 @@ void SpawnPiece(PieceType type, BlockType color)
     }
 
     //put the origin into a form I can use
-    int orig = -1;
+    int neworigin;
+    bool loop = true;
     int counter = 1;
-    while(orig == -1)
+    while(loop)
     {
-      if(orig << counter == 0)
-        orig = counter-1;
-      else ++counter;
+      if(origin << counter >255)
+      {
+        neworigin = counter-1;
+        loop = false;
+        printf("origin: %d\n", origin);
+      }else ++counter;
+      //printf("====Testing====\n%d\n%d\n%d\n%d\n%d\n%d", origin << 1, origin << 2, origin << 3, origin << 4, origin << 5, origin << 6);
+      //loop = false;
     }
 
     for(int i = 0; i < 2; ++i)
@@ -108,8 +116,9 @@ void SpawnPiece(PieceType type, BlockType color)
         result = actualpiece[i] & (0b10000000 >> j);
         if(result != 0) //if the current bit is 1
         {
-          int x = (gridwidth/2)-orig+j;
+          int x = (gridwidth/2)-neworigin+j;
           SetCell(x, i, color);
+          printf("%d, %d, %d\n", gridwidth/2, neworigin, j);
         }
       }
     }
