@@ -8,6 +8,7 @@
 #include "blocks.hpp"
 #include "piece.hpp"
 #include <ctime>
+#include <cmath>
 
 ///These get defined in their respective source files. no reason to do it here.
 //SDL_Window* MainWindow;

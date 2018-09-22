@@ -3,7 +3,6 @@
 
 #include "blocks.hpp"
 
-extern void SpawnPiece();
 
 enum PieceType {
     PIECE_T,
@@ -24,4 +23,5 @@ extern unsigned char piece_l[];
 extern unsigned char piece_rl[];
 extern unsigned char piece_i[];
 
+extern void SpawnPiece(PieceType, BlockType);
 #endif

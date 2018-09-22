@@ -3,6 +3,7 @@
 #include "renderer.hpp"
 #include "cmath"
 #include "window.hpp"
+#include <cstdlib>
 
 BlockType* BlockArray;
 

@@ -15,3 +15,5 @@ bin/
 obj/
 
 *.cbp
+lib/
+include/SDL2/

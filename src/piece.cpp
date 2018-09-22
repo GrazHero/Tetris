@@ -1,12 +1,14 @@
 #include "piece.hpp"
+#include "grid.hpp"
 #include <cstdio>
 #include <cmath>
+#include <cstdlib>
 
 //Let's try making the pieces only use one bit per block
-//Only works with C++14
+//Only works with C++14 because of binary literals
 unsigned char piece_t[] = {
-0b00111000,
-0b00010000
+0b00010000,
+0b00111000
 };
 
 unsigned char piece_b[] = {
@@ -36,46 +38,79 @@ unsigned char piece_rl[] = {
 
 unsigned char piece_i[] = {
 0b00111100,
+0b00000000
 };
 
-void SetOrigin(unsigned char* orig, int x, int y)
+void SetOrigin(unsigned char& orig, int x)
 {
-    orig[y] = 0b10000000 >> x;
+    orig = 0b10000000 >> x;
 }
 
-void SpawnPiece(PieceType type)
+void SpawnPiece(PieceType type, BlockType color)
 {
-    unsigned char origin[] = {
-    0b00000000,
-    0b00000000
-    };
+    unsigned char origin = 0b00000000; // for offsetting the piece on the grid
 
-//    BlockType color = (BlockType)(rand()%(BLOCKTYPE_MAX-1) +1);
+    unsigned char* actualpiece; // will point to one of the global hard coded pieces
+
+    unsigned char result; //for bitwise AND
+
+    const short piecesize = sizeof(unsigned char)*2*8; //16
 
     switch(type)
     {
     case PIECE_T:
-        SetOrigin(origin, 2, 1);
+        SetOrigin(origin, 3);
+        actualpiece = piece_t;
         break;
     case PIECE_B:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_b;
         break;
     case PIECE_S:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_s;
         break;
     case PIECE_RS:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_rs;
         break;
     case PIECE_L:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_l;
         break;
     case PIECE_RL:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_rl;
         break;
     case PIECE_I:
-        SetOrigin(origin, 3, 0);
+        SetOrigin(origin, 3);
+        actualpiece = piece_i;
         break;
     }
 
+    //put the origin into a form I can use
+    int orig = -1;
+    int counter = 1;
+    while(orig == -1)
+    {
+      if(orig << counter == 0)
+        orig = counter-1;
+      else ++counter;
+    }
 
+    for(int i = 0; i < 2; ++i)
+    {
+      for(int j = 0; j < piecesize/2; ++j)
+      {
+        //i/piecesize/2
+        //i/8 = 0 when i < 8
+
+        result = actualpiece[i] & (0b10000000 >> j);
+        if(result != 0) //if the current bit is 1
+        {
+          int x = (gridwidth/2)-orig+j;
+          SetCell(x, i, color);
+        }
+      }
+    }
 }
