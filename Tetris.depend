@@ -75,7 +75,7 @@
 	"window.hpp"
 	<cstdlib>
 
-1537590730 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
+1537625600 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
 	"event.hpp"
 	"grid.hpp"
 	"game.hpp"
@@ -87,7 +87,7 @@
 	"blocks.hpp"
 	<cstdio>
 
-1537585672 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
+1537633107 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
 	<cstdio>
 	<SDL2/SDL.h>
 	"window.hpp"
@@ -96,10 +96,12 @@
 	"grid.hpp"
 	"blocks.hpp"
 	"piece.hpp"
+	"timing.hpp"
 	<ctime>
 	<cmath>
+	<cstdlib>
 
-1537590488 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
+1537625600 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
 	"piece.hpp"
 	"grid.hpp"
 	<cstdio>
@@ -122,7 +124,7 @@
 	<SDL2/SDL.h>
 	"blocks.hpp"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -134,10 +136,10 @@
 	"SDL_error.h"
 	"SDL_events.h"
 	"SDL_filesystem.h"
-	"SDL_joystick.h"
 	"SDL_gamecontroller.h"
 	"SDL_haptic.h"
 	"SDL_hints.h"
+	"SDL_joystick.h"
 	"SDL_loadso.h"
 	"SDL_log.h"
 	"SDL_messagebox.h"
@@ -145,6 +147,7 @@
 	"SDL_power.h"
 	"SDL_render.h"
 	"SDL_rwops.h"
+	"SDL_shape.h"
 	"SDL_system.h"
 	"SDL_thread.h"
 	"SDL_timer.h"
@@ -153,12 +156,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_main.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_stdinc.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -172,6 +175,7 @@
 	<memory.h>
 	<string.h>
 	<strings.h>
+	<wchar.h>
 	<inttypes.h>
 	<stdint.h>
 	<ctype.h>
@@ -186,34 +190,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_config.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_platform.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\begin_code.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\begin_code.h
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\close_code.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\close_code.h
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_assert.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_atomic.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_audio.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -223,56 +227,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_error.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_endian.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_mutex.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_thread.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
 	"SDL_mutex.h"
 	"begin_code.h"
 	<process.h>
+	<process.h>
+	<stdlib.h>
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_rwops.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_clipboard.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_cpuinfo.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
 	<altivec.h>
-	<mmintrin.h>
 	<mm3dnow.h>
+	<immintrin.h>
+	<mmintrin.h>
 	<xmmintrin.h>
 	<emmintrin.h>
+	<pmmintrin.h>
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_events.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -286,7 +294,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_video.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -294,13 +302,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_pixels.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_rect.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -308,7 +316,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_surface.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -317,11 +325,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_blendmode.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_keyboard.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -329,27 +337,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_keycode.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_scancode.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_mouse.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_joystick.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_gamecontroller.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -357,11 +365,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_quit.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_gesture.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -369,60 +377,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_touch.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_filesystem.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_haptic.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_hints.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_loadso.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_log.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_messagebox.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_power.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_render.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_system.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -430,13 +438,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_timer.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1476935894 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_version.h
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -476,4 +484,22 @@
 	<cstdio>
 
 1537596591 source:/home/shannon/Documents/Tetris/src/test.cpp
+
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1537653922 c:\users\fog\desktop\newtetris\tetris\include\timing.hpp
+
+1537654642 source:c:\users\fog\desktop\newtetris\tetris\src\timing.cpp
+	"timing.hpp"
+	<cmath>
+	<SDL2/SDL.h>
+	<cstdio>
+	<vector>
 
