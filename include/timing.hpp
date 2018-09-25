@@ -1,12 +1,14 @@
 #ifndef TIME_HPP
 #define TIME_HPP
 
-extern int now;
-extern int last;
-extern double DeltaTime;
-extern unsigned long framecount;
-extern double framerate;
 
-extern void CalculateDeltaTime();
+extern unsigned framecount;
+extern unsigned secondcount;
+
+extern float mscount;
+extern float framerate;
+extern double DeltaTime;
+
+extern void CalculateTime();
 
 #endif // TIME_HPP

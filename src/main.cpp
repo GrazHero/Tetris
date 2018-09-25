@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
 
 #include "window.hpp"
 #include "event.hpp"
@@ -8,6 +9,7 @@
 #include "blocks.hpp"
 #include "piece.hpp"
 #include "timing.hpp"
+#include "main.hpp"
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
@@ -16,13 +18,20 @@
 //SDL_Window* MainWindow;
 //SDL_Event* MainEvent;
 //SDL_Renderer* MainRenderer;
+bool MainLoop = true;
 
 int main(int argc, char** argv)
 {
     //srand(time(NULL));
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
-      printf("Error\n");
+      return -1;
     MainWindow = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowwidth, windowheight, SDL_WINDOW_SHOWN);
+    SDL_SysWMinfo* MainWindowInfo;
+
+    SDL_VERSION(&(MainWindowInfo->version));
+    SDL_GetWindowWMInfo(MainWindow, MainWindowInfo);
+    MainWindowHandle = MainWindowInfo->info.win.window;
+
     MainEvent = new SDL_Event;
     MainRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_SOFTWARE);
 
@@ -30,19 +39,19 @@ int main(int argc, char** argv)
 
 //    SpawnPiece();
 
-    bool loop = true;
-    while(loop)
+    while(MainLoop)
     {
         Draw();
         if(HandleEvents() == 1)
-            loop = false;
-        CalculateDeltaTime();
+            MainLoop = false;
+        CalculateTime();
     }
 
 
-    delete[] BlockArray;
     SDL_DestroyRenderer(MainRenderer);
     SDL_DestroyWindow(MainWindow);
     SDL_Quit();
+EOP:
+    delete[] BlockArray;
     return 0;
 }

@@ -65,7 +65,7 @@ void SpawnPiece(PieceType type, BlockType color)
         actualpiece = piece_t;
         break;
     case PIECE_B:
-        SetOrigin(origin, 3);
+        SetOrigin(origin, 4);
         actualpiece = piece_b;
         break;
     case PIECE_S:
@@ -85,7 +85,7 @@ void SpawnPiece(PieceType type, BlockType color)
         actualpiece = piece_rl;
         break;
     case PIECE_I:
-        SetOrigin(origin, 3);
+        SetOrigin(origin, 4);
         actualpiece = piece_i;
         break;
     }

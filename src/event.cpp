@@ -1,6 +1,7 @@
 #include "event.hpp"
 #include "grid.hpp"
 #include "game.hpp"
+#include "quit.hpp"
 
 SDL_Event* MainEvent;
 
@@ -19,6 +20,7 @@ int HandleEvents()
                 break;
             case SDL_SCANCODE_SPACE:
                 TestPiece(); //just for testing. Get ready for the segfaults
+                //Killswitch("Don't press space, idiot");
                 break;
             }
         }

@@ -75,10 +75,11 @@
 	"window.hpp"
 	<cstdlib>
 
-1537625600 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
+1537772836 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
 	"event.hpp"
 	"grid.hpp"
 	"game.hpp"
+	"quit.hpp"
 
 1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\grid.cpp
 	"grid.hpp"
@@ -87,9 +88,10 @@
 	"blocks.hpp"
 	<cstdio>
 
-1537633107 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
+1537771484 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
 	<cstdio>
 	<SDL2/SDL.h>
+	<SDL2/SDL_syswm.h>
 	"window.hpp"
 	"event.hpp"
 	"renderer.hpp"
@@ -97,11 +99,12 @@
 	"blocks.hpp"
 	"piece.hpp"
 	"timing.hpp"
+	"main.hpp"
 	<ctime>
 	<cmath>
 	<cstdlib>
 
-1537625600 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
+1537759139 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
 	"piece.hpp"
 	"grid.hpp"
 	<cstdio>
@@ -115,7 +118,7 @@
 	"blocks.hpp"
 	<cstdio>
 
-1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\window.cpp
+1537769087 source:c:\users\fog\desktop\newtetris\tetris\src\window.cpp
 	"window.hpp"
 
 1537579715 c:\users\fog\desktop\newtetris\tetris\include\blocks.hpp
@@ -452,8 +455,10 @@
 1537579715 c:\users\fog\desktop\newtetris\tetris\include\renderer.hpp
 	<SDL2/SDL.h>
 
-1537579715 c:\users\fog\desktop\newtetris\tetris\include\window.hpp
+1537769087 c:\users\fog\desktop\newtetris\tetris\include\window.hpp
+	<windows.h>
 	<SDL2/SDL.h>
+	<SDL2/SDL_syswm.h>
 
 1537579715 c:\users\fog\desktop\newtetris\tetris\include\event.hpp
 	<SDL2/SDL.h>
@@ -494,12 +499,51 @@
 	"begin_code.h"
 	"close_code.h"
 
-1537653922 c:\users\fog\desktop\newtetris\tetris\include\timing.hpp
+1537772854 c:\users\fog\desktop\newtetris\tetris\include\timing.hpp
 
-1537654642 source:c:\users\fog\desktop\newtetris\tetris\src\timing.cpp
+1537778443 source:c:\users\fog\desktop\newtetris\tetris\src\timing.cpp
 	"timing.hpp"
+	"quit.hpp"
 	<cmath>
 	<SDL2/SDL.h>
 	<cstdio>
 	<vector>
+
+1537766577 c:\users\fog\desktop\newtetris\tetris\include\main.hpp
+
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_syswm.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	<windows.h>
+	<Inspectable.h>
+	<X11/Xlib.h>
+	<X11/Xatom.h>
+	<directfb.h>
+	<UIKit/UIKit.h>
+	"SDL_egl.h"
+	"close_code.h"
+
+1519922328 c:\users\fog\desktop\newtetris\tetris\include\sdl2\sdl_egl.h
+	<EGL/egl.h>
+	<EGL/eglext.h>
+	<stdint.h>
+	<inttypes.h>
+	<stdint.h>
+	<windows.h>
+	<Unknwn.h>
+	<mir_toolkit/mir_client_library.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+
+1537771694 source:c:\users\fog\desktop\newtetris\tetris\src\quit.cpp
+	"quit.hpp"
+	"main.hpp"
+	"window.hpp"
+	<cstdlib>
+	<windows.h>
+
+1537766577 c:\users\fog\desktop\newtetris\tetris\include\quit.hpp
 
