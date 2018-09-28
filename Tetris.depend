@@ -88,7 +88,7 @@
 	"blocks.hpp"
 	<cstdio>
 
-1537771484 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
+1538115826 source:c:\users\fog\desktop\newtetris\tetris\src\main.cpp
 	<cstdio>
 	<SDL2/SDL.h>
 	<SDL2/SDL_syswm.h>
@@ -118,7 +118,7 @@
 	"blocks.hpp"
 	<cstdio>
 
-1537769087 source:c:\users\fog\desktop\newtetris\tetris\src\window.cpp
+1538115826 source:c:\users\fog\desktop\newtetris\tetris\src\window.cpp
 	"window.hpp"
 
 1537579715 c:\users\fog\desktop\newtetris\tetris\include\blocks.hpp
@@ -455,7 +455,7 @@
 1537579715 c:\users\fog\desktop\newtetris\tetris\include\renderer.hpp
 	<SDL2/SDL.h>
 
-1537769087 c:\users\fog\desktop\newtetris\tetris\include\window.hpp
+1538115826 c:\users\fog\desktop\newtetris\tetris\include\window.hpp
 	<windows.h>
 	<SDL2/SDL.h>
 	<SDL2/SDL_syswm.h>
@@ -538,7 +538,7 @@
 	<X11/Xlib.h>
 	<X11/Xutil.h>
 
-1537771694 source:c:\users\fog\desktop\newtetris\tetris\src\quit.cpp
+1538115826 source:c:\users\fog\desktop\newtetris\tetris\src\quit.cpp
 	"quit.hpp"
 	"main.hpp"
 	"window.hpp"

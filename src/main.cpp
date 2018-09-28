@@ -30,8 +30,16 @@ int main(int argc, char** argv)
 
     SDL_VERSION(&(MainWindowInfo->version));
     SDL_GetWindowWMInfo(MainWindow, MainWindowInfo);
+    #ifdef WINDOWS_COMPILE
+    /*I hate to put a preprocessor #if right in the open like this. I wrote windows specific code without
+     *thinking very much. I'll try to avoid making this a hassle. From now on I'll have functions obfuscate these
+     *checks so they don't clutter stuff. WINDOWS_COMPILE is defined in window.hpp (no relation to the OS. Very
+     *confusing and dumb, I know) because that's where it is first needed as of now, because I need to get the
+     *HWND if we're on windows. That was rather shortsighted, OS checking should be it's own thing, not tethered
+     *to one specific subset of why we might want to block out certain code depending on the OS we're compiling on/for
+     */
     MainWindowHandle = MainWindowInfo->info.win.window;
-
+    #endif // WINDOWS_COMPILE
     MainEvent = new SDL_Event;
     MainRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_SOFTWARE);
 
