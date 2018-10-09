@@ -11,7 +11,7 @@ int HandleEvents()
     {
         if(MainEvent->type == SDL_QUIT)
             return 1;
-        if(MainEvent->type == SDL_KEYUP)
+        if(MainEvent->type == SDL_KEYDOWN)
         {
             switch(MainEvent->key.keysym.scancode)
             {
@@ -19,8 +19,29 @@ int HandleEvents()
                 return 1; //this will break us from the main loop since returning 1 will set the loop var to false
                 break;
             case SDL_SCANCODE_SPACE:
-                TestPiece(); //just for testing. Get ready for the segfaults
                 //Killswitch("Don't press space, idiot");
+                //CurrentPiece->CheckClaimed(5, 10);
+                break;
+            case SDL_SCANCODE_UP:
+                //CurrentPiece->Move(0, -1);
+                break;
+            case SDL_SCANCODE_DOWN:
+                SpeedUp(true, 15);
+                break;
+            case SDL_SCANCODE_LEFT:
+                CurrentPiece->Move(-1, 0);
+                break;
+            case SDL_SCANCODE_RIGHT:
+                CurrentPiece->Move(1, 0);
+                break;
+            }
+        }
+        if(MainEvent->type == SDL_KEYUP)
+        {
+            switch(MainEvent->key.keysym.scancode)
+            {
+            case SDL_SCANCODE_DOWN:
+                SpeedUp(false);
                 break;
             }
         }

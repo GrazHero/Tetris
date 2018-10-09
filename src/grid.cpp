@@ -54,3 +54,8 @@ void Click(const SDL_MouseButtonEvent event)
         PlaceBlockWithMouse(event.x, event.y);
     }
 }
+
+BlockType CheckCell(int x, int y)
+{
+  return BlockArray[x+y*gridwidth];
+}

@@ -16,5 +16,6 @@ extern BlockType* BlockArray;
 
 extern void DrawBlocks();
 extern void PlaceBlockWithMouse(int x, int y);
+extern int CheckLines();
 
 #endif

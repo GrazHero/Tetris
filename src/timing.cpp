@@ -8,8 +8,8 @@
 Uint64 now;
 Uint64 last = 0;
 Uint64 freq;
-float frametime; // in milliseconds
-float lastframetime;
+double frametime; // in milliseconds
+double lastframetime;
 unsigned framecount = 0;
 unsigned secondcount = 0;
 
@@ -41,7 +41,8 @@ void CalculateTime()
                  "for calculating frame rate and delta time. Dare I ask how old it is?");
     }
 
-    frametime = 1000.0*(((float)now)/(float)freq - ((float)last)/float(freq));
+      frametime = 1000.0*(((double)now)/((double)freq) - ((double)last)/((double)freq));
+        //printf("Frame number: %u\n", framecount);
       last = now;
 
    // printf("ms: %f\n", mscount);
@@ -51,22 +52,22 @@ void CalculateTime()
     //printf("%f\n", frametime);
       DeltaTime = (double)(frametime)/1000.0;
 
-    mscount += frametime;
+      if(framecount > 0)mscount += frametime;
       lastframetime = frametime;
 
       if(mscount - lastmscount >= 1000)//if one second has passed
       {
         secondcount += floor((mscount - lastmscount)/1000);
         lastmscount = mscount;
-        //printf("%u seconds\n", secondcount);
       }
+        //printf("%u seconds, ", secondcount);
 
-      if(framecount%2 == 0)//only calculate the framerate every other frame. I assume vector functions are expensive
+      /*if(framecount%2 == 0)//only calculate the framerate every other frame. I assume vector functions are expensive
       {
         framerate = 1000.0f/((frametime));
         framevector.insert(framevector.begin(), framerate);
         framevector.pop_back();
-      }
+      }*/
 
 /*      if(secondcount%2==0) //we evaluate the average frame rate every 2 seconds
 //      {
@@ -84,7 +85,10 @@ void CalculateTime()
 
       ++framecount;
         avgframerate = 1000.0/frametime;
-        printf("FPS: %f\n", frametime);
+        //if(framecount%60==0)printf("%f FPS\r",avgframerate);
+//          else printf("\r");
+        /*TODO
+         *Move all these printfs to a dedicated debug file*/
       //printf("begin:%d\ncapacity:%d\n", framevector.begin(), framevector.capacity());
       break;
 //    }

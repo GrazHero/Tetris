@@ -41,14 +41,14 @@ unsigned char piece_i[] = {
 0b00000000
 };
 
-void SetOrigin(unsigned char& orig, int x)
+void Piece::SetOrigin(unsigned char& orig, int x)
 {
     printf("original origin: %d\n", orig);
     orig = (0b10000000 >> x);
-    printf("new origin: %d\n", orig);
+    //printf("new origin: %d\n", orig);
 }
 
-void SpawnPiece(PieceType type, BlockType color)
+void Piece::Spawn()
 {
     unsigned char origin = 0b00000000; // for offsetting the piece on the grid
 
@@ -58,11 +58,12 @@ void SpawnPiece(PieceType type, BlockType color)
 
     const short piecesize = sizeof(unsigned char)*2*8; //16
 
-    switch(type)
+    switch(m_type)
     {
     case PIECE_T:
         SetOrigin(origin, 3);
         actualpiece = piece_t;
+
         break;
     case PIECE_B:
         SetOrigin(origin, 4);
@@ -100,7 +101,7 @@ void SpawnPiece(PieceType type, BlockType color)
       {
         neworigin = counter-1;
         loop = false;
-        printf("origin: %d\n", origin);
+        //printf("origin: %d\n", origin);
       }else ++counter;
       //printf("====Testing====\n%d\n%d\n%d\n%d\n%d\n%d", origin << 1, origin << 2, origin << 3, origin << 4, origin << 5, origin << 6);
       //loop = false;
@@ -117,9 +118,75 @@ void SpawnPiece(PieceType type, BlockType color)
         if(result != 0) //if the current bit is 1
         {
           int x = (gridwidth/2)-neworigin+j;
-          SetCell(x, i, color);
-          printf("%d, %d, %d\n", gridwidth/2, neworigin, j);
+          SetCell(x, i, m_color);
+          ClaimCell(x, i);
+          //printf("%d, %d, %d\n", gridwidth/2, neworigin, j);
         }
       }
     }
+    //m_xpos = (gridwidth/2)-neworigin;
+}
+
+void Piece::ClaimCell(int x, int y)
+{
+  SDL_Point point;
+  point.x = x;
+  point.y = y;
+  ClaimedCells.push_back(point);
+  //printf("point x: %d\n", (ClaimedCells.begin())->x);
+}
+
+///Returns 1 if the piece is moved successfully, 0 if there's something in the way
+int Piece::Move(int xdir, int ydir)
+{
+  //check if we're gonna hit something
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    int nextx = (*it).x+xdir;
+    int nexty = (*it).y+ydir;
+    if(nextx >= gridwidth || nextx < 0 || nexty >= gridheight || nexty < 0)
+      return 0;
+    else if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
+      return 0;
+  }
+  //clear the cells we currently occupy
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    SetCell((*it).x, (*it).y, EMPTY);
+  }
+
+  //claim cells in the direction we're moving
+  //ClaimedCells.clear();
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    SetCell(((*it).x)+xdir, (*it).y+ydir, m_color);
+    (*it).x += xdir;
+    (*it).y += ydir;
+  }
+  return 1;
+  /*TODO
+   *add checks for hitting walls, floor, other blocks*/
+}
+
+int Piece::CheckClaimed(int x, int y)
+{
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    //printf("Checking %d against %d\n", (*it).x, x);
+    //printf("Checking %d against %d\n", (*it).y, y);
+    if(((*it).x) == x && ((*it).y) == y)
+    {
+      //printf("\n\nclaimed\n\n");
+      return 1;
+    }
+  }
+   return 0;
+}
+
+void Piece::PrintClaimed()
+{
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    //printf("\n\n\nx = %d, y = %d", (*it).x, (*it).y);
+  }
 }

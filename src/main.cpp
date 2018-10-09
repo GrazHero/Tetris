@@ -10,6 +10,7 @@
 #include "piece.hpp"
 #include "timing.hpp"
 #include "main.hpp"
+#include "game.hpp"
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
@@ -22,7 +23,7 @@ bool MainLoop = true;
 
 int main(int argc, char** argv)
 {
-    //srand(time(NULL));
+    srand(time(NULL));
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
       return -1;
     MainWindow = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowwidth, windowheight, SDL_WINDOW_SHOWN);
@@ -44,11 +45,11 @@ int main(int argc, char** argv)
     MainRenderer = SDL_CreateRenderer(MainWindow, -1, SDL_RENDERER_SOFTWARE);
 
     InitGrid();
-
-//    SpawnPiece();
+    InitGame();
 
     while(MainLoop)
     {
+        Update();
         Draw();
         if(HandleEvents() == 1)
             MainLoop = false;

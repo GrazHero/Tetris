@@ -86,3 +86,53 @@ void PlaceBlockWithMouse(int x, int y)
     BlockType type = BlockType(rand() % (BLOCKTYPE_MAX-1)+1);
     SetCell(gridx, gridy, type);
 }
+
+int CheckLines() //currently broken
+{
+  int x = gridwidth-1;
+  int y = gridheight-1;
+  int counter = 0;
+  int linescleared = 0;
+  int firstlinecleared = -1;
+  for(int i = (gridheight*gridwidth)-1; i >=0; --i)
+  {
+
+    if(CheckCell(x, y) != EMPTY)
+      counter++;
+
+    --x;
+    if((i-1)%gridwidth==0)
+    {
+      if(counter == gridwidth)
+      {
+        //Score!
+        linescleared++;
+        if(firstlinecleared == -1)
+          firstlinecleared = y;
+        int j = 0;
+        while(j < gridwidth)
+        {
+          SetCell(j, y, EMPTY);
+          ++j;
+        }
+      }
+      x=gridwidth-1;
+      --y;
+      counter = 0;
+    }
+  }
+  //move everything down by firstlinecleared - (firstlinecleared - linescleared)
+  for(int i = firstlinecleared - (firstlinecleared - linescleared); i >= 0; --i)
+  {
+    int j = 0;
+    while(j < gridwidth)
+    {
+      if(CheckCell(j, i) != EMPTY)
+      {
+        SetCell(j, i + (linescleared), CheckCell(j, i));
+        SetCell(j, i, EMPTY);
+      }
+      j++;
+    }
+  }
+}
