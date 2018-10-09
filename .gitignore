@@ -17,3 +17,5 @@ obj/
 *.cbp
 lib/
 include/SDL2/
+*.depend
+*.layout
