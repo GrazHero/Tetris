@@ -67,7 +67,7 @@
 	<cmath>
 	<cstdlib>
 
-1539066204 source:c:\users\fog\desktop\newtetris\tetris\src\blocks.cpp
+1539091996 source:c:\users\fog\desktop\newtetris\tetris\src\blocks.cpp
 	"blocks.hpp"
 	"grid.hpp"
 	"renderer.hpp"
@@ -75,7 +75,7 @@
 	"window.hpp"
 	<cstdlib>
 
-1539064552 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
+1539182035 source:c:\users\fog\desktop\newtetris\tetris\src\event.cpp
 	"event.hpp"
 	"grid.hpp"
 	"game.hpp"
@@ -105,12 +105,13 @@
 	<cmath>
 	<cstdlib>
 
-1539063249 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
+1539186739 source:c:\users\fog\desktop\newtetris\tetris\src\piece.cpp
 	"piece.hpp"
 	"grid.hpp"
 	<cstdio>
 	<cmath>
 	<cstdlib>
+	<iostream>
 
 1537579715 source:c:\users\fog\desktop\newtetris\tetris\src\renderer.cpp
 	"renderer.hpp"
@@ -465,20 +466,21 @@
 	<SDL2/SDL.h>
 	<cstdio>
 
-1539062369 c:\users\fog\desktop\newtetris\tetris\include\piece.hpp
+1539187236 c:\users\fog\desktop\newtetris\tetris\include\piece.hpp
 	"blocks.hpp"
 	<vector>
 	<SDL2/SDL.h>
 
-1539064552 c:\users\fog\desktop\newtetris\tetris\include\game.hpp
+1539181505 c:\users\fog\desktop\newtetris\tetris\include\game.hpp
 	"piece.hpp"
 
-1539091353 source:c:\users\fog\desktop\newtetris\tetris\src\game.cpp
+1539186815 source:c:\users\fog\desktop\newtetris\tetris\src\game.cpp
 	"game.hpp"
 	"piece.hpp"
 	"timing.hpp"
 	<cstdlib>
 	<cstdio>
+	<iostream>
 
 1537595228 /home/shannon/Documents/Tetris/include/game.hpp
 
@@ -505,7 +507,7 @@
 
 1539057580 c:\users\fog\desktop\newtetris\tetris\include\timing.hpp
 
-1539062282 source:c:\users\fog\desktop\newtetris\tetris\src\timing.cpp
+1539136325 source:c:\users\fog\desktop\newtetris\tetris\src\timing.cpp
 	"timing.hpp"
 	"quit.hpp"
 	<cmath>

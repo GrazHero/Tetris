@@ -1,3 +1,8 @@
 
 -make rows clear properly
 -make blocks drop down when that happens
+-make pieces rotate
+-make a score system
+-make speed gradually increase
+-make a gui where the next piece can be previewed
+-make a lose state

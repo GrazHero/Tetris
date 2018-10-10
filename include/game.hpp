@@ -6,11 +6,13 @@ extern void TestPiece();
 extern void InitGame();
 extern void Update();
 extern void SpeedUp(bool speed, int amount = 0);
+extern void TogglePause();
 
 extern Piece* CurrentPiece;
 extern Piece* NextPiece;
 
 extern int GameSpeed;
+extern bool GamePaused;
 extern float RealSpeed;
 
 

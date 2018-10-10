@@ -85,7 +85,7 @@ void CalculateTime()
 
       ++framecount;
         avgframerate = 1000.0/frametime;
-        //if(framecount%60==0)printf("%f FPS\r",avgframerate);
+//        if(framecount%60==0)printf("%f FPS\r",avgframerate);
 //          else printf("\r");
         /*TODO
          *Move all these printfs to a dedicated debug file*/

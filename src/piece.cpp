@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 
 //Let's try making the pieces only use one bit per block
 //Only works with C++14 because of binary literals
@@ -50,6 +51,8 @@ void Piece::SetOrigin(unsigned char& orig, int x)
 
 void Piece::Spawn()
 {
+    ClaimedCells.reserve(9);
+
     unsigned char origin = 0b00000000; // for offsetting the piece on the grid
 
     unsigned char* actualpiece; // will point to one of the global hard coded pieces
@@ -63,7 +66,7 @@ void Piece::Spawn()
     case PIECE_T:
         SetOrigin(origin, 3);
         actualpiece = piece_t;
-
+        m_centerOffset = {3, 1};
         break;
     case PIECE_B:
         SetOrigin(origin, 4);
@@ -72,22 +75,27 @@ void Piece::Spawn()
     case PIECE_S:
         SetOrigin(origin, 3);
         actualpiece = piece_s;
+        m_centerOffset = {3, 0};
         break;
     case PIECE_RS:
         SetOrigin(origin, 3);
         actualpiece = piece_rs;
+        m_centerOffset = {3, 0};
         break;
     case PIECE_L:
         SetOrigin(origin, 3);
         actualpiece = piece_l;
+        m_centerOffset = {4, 1};
         break;
     case PIECE_RL:
         SetOrigin(origin, 3);
         actualpiece = piece_rl;
+        m_centerOffset = {2, 1};
         break;
     case PIECE_I:
         SetOrigin(origin, 4);
         actualpiece = piece_i;
+        m_centerOffset = {3, 0};
         break;
     }
 
@@ -120,11 +128,15 @@ void Piece::Spawn()
           int x = (gridwidth/2)-neworigin+j;
           SetCell(x, i, m_color);
           ClaimCell(x, i);
+          if(j == m_centerOffset.x && i == m_centerOffset.y)
+          {
+            m_centerIndex = ClaimedCells.size() -1;//the distance from the front of the vectorwhere the "center piece" is
+          }
           //printf("%d, %d, %d\n", gridwidth/2, neworigin, j);
         }
       }
     }
-    //m_xpos = (gridwidth/2)-neworigin;
+    m_centerCell = &ClaimedCells.at(m_centerIndex);
 }
 
 void Piece::ClaimCell(int x, int y)
@@ -132,7 +144,7 @@ void Piece::ClaimCell(int x, int y)
   SDL_Point point;
   point.x = x;
   point.y = y;
-  ClaimedCells.push_back(point);
+  ClaimedCells.insert(ClaimedCells.begin(), point);
   //printf("point x: %d\n", (ClaimedCells.begin())->x);
 }
 
@@ -149,11 +161,8 @@ int Piece::Move(int xdir, int ydir)
     else if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
       return 0;
   }
-  //clear the cells we currently occupy
-  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
-  {
-    SetCell((*it).x, (*it).y, EMPTY);
-  }
+
+  ClearCells();
 
   //claim cells in the direction we're moving
   //ClaimedCells.clear();
@@ -164,8 +173,6 @@ int Piece::Move(int xdir, int ydir)
     (*it).y += ydir;
   }
   return 1;
-  /*TODO
-   *add checks for hitting walls, floor, other blocks*/
 }
 
 int Piece::CheckClaimed(int x, int y)
@@ -187,6 +194,87 @@ void Piece::PrintClaimed()
 {
   for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
   {
-    //printf("\n\n\nx = %d, y = %d", (*it).x, (*it).y);
+    printf("\nx = %d, y = %d", (*it).x, (*it).y);
   }
+  printf("\n");
+}
+
+int Piece::Rotate(int dir) //dir = 1 for counterclockwise, -1 for clockwise. returns 1 if rotation is successful, otherwise 0
+{
+    //x = y
+    //y = -x
+    /*
+    ..X..3
+    ..X..4
+    ..X..5
+    ..X..6
+    34567
+    */
+  if(m_type == PIECE_B)
+    return 1; //no need to rotate this piece
+
+  int originalSize = ClaimedCells.size();
+  int inserts = 0;
+  for(int i = 0; i < originalSize; ++i) //using iterators would just make this harder
+  {
+    /* In hindsight, I could have done this like I did the Piece::Move() function.*/
+    int cellx = ClaimedCells.at(i+inserts).x;
+    int celly = ClaimedCells.at(i+inserts).y;
+
+    int xdifference, ydifference, nextx, nexty;
+    xdifference = cellx - m_centerCell->x;
+    ydifference = celly - m_centerCell->y;
+    nextx = m_centerCell->x + ydifference;
+    nexty = m_centerCell->y - xdifference;
+
+    if(nextx >= gridwidth || nextx < 0 || nexty >= gridheight || nexty < 0)
+      goto _RESTORE; // goto :^)
+    else if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
+      goto _RESTORE;
+
+
+
+
+    SDL_Point p = {nextx, nexty};
+    ClaimedCells.insert(ClaimedCells.begin(), p);
+    ++inserts;
+    m_centerCell = &ClaimedCells.at(m_centerIndex+inserts);//Set this again since vector::insert will invalidate it
+  }
+  //if we rotated without error, resize the array to truncate the old values, then clean them off of the global grid array
+  ClearCells();
+  ClaimedCells.resize(4);
+  SetAllCells();
+  m_centerCell = &ClaimedCells.at(m_centerIndex);
+  return 1;
+_RESTORE:
+  //if we ran into a problem, we need to undo what we did to the vector
+  if(inserts > 0) ClaimedCells.erase(ClaimedCells.begin(), ClaimedCells.begin()+inserts+1);
+  m_centerCell = &ClaimedCells.at(m_centerIndex);
+  return 0;
+}
+
+void Piece::ClearCells()
+{
+  //clear the cells we currently occupy
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    SetCell((*it).x, (*it).y, EMPTY);
+  }
+}
+
+void Piece::SetAllCells()
+{
+  int i = 0;
+  for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
+  {
+    SetCell((*it).x, (*it).y, m_color);
+    //printf("%d, %d!\n", (*it).x, (*it).y);
+  }
+}
+
+bool Piece::CheckCenterCell(int x, int y)
+{
+  if(m_centerCell->x == x && m_centerCell->y == y)
+    return true;
+  else return false;
 }

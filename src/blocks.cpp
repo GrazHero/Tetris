@@ -4,6 +4,8 @@
 #include "cmath"
 #include "window.hpp"
 #include <cstdlib>
+#include "piece.hpp"
+#include "game.hpp"
 
 BlockType* BlockArray;
 
@@ -56,7 +58,8 @@ void DrawBlocks()
             SetColor(106, 90, 205);
             break;
         }
-
+        //debug
+        if(CurrentPiece->CheckCenterCell(x, y)) SetColor(255, 255, 255);
         SDL_SetRenderDrawColor(MainRenderer, blockcolor.r, blockcolor.g, blockcolor.b, blockcolor.a);
         SDL_Rect testrect = {50, 50, 50, 50};
         if(i==50)
