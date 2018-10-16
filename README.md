@@ -8,7 +8,7 @@ It was structurally not very well planned out. I started out mostly using C++ as
 Lots of global variables for controlling the game state, etc...
 Then I started mixing in more C++ features. As a result, the project became something of a fractured mess.
 Definitely very poorly optimized. Because of my lack of planning, there are several different loops through
-the whole grid per frame. I'm too trigger happy with ``for`` loops in general. Ideally I'd do everything I
+the whole grid per frame. I'm too trigger happy with `for` loops in general. Ideally I'd do everything I
 need in a single loop, but it's too late now.
 
 It's just for fun though.
@@ -18,13 +18,14 @@ It's almost what I'd consider "playable", just a bit more needs to be done.
 <h2>To Do</h2>
 <p>
 If my interest doesn't wane, I'll add
-*actual graphics
-*a little area to disply score and the next piece
-*ability to drop the current piece down immediately
-*high scores that persist after game is closed
-*a title screen
-*music
-*ability to select speed, have it gradually increase just like in the real tetris
+
+* actual graphics
+* a little area to disply score and the next piece
+* ability to drop the current piece down immediately
+* high scores that persist after game is closed
+* a title screen
+* music
+* ability to select speed, have it gradually increase just like in the real tetris
 </p>
 
 <h2>Compilation</h2>
