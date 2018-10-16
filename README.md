@@ -8,7 +8,7 @@ It was structurally not very well planned out. I started out mostly using C++ as
 Lots of global variables for controlling the game state, etc...
 Then I started mixing in more C++ features. As a result, the project became something of a fractured mess.
 Definitely very poorly optimized. Because of my lack of planning, there are several different loops through
-the whole grid per frame. I'm too trigger happy with `for` loops in general. Ideally I'd do everything I
+the whole grid per frame. I'm too trigger happy with for loops in general. Ideally I'd do everything I
 need in a single loop, but it's too late now.
 
 It's just for fun though.
