@@ -1,4 +1,4 @@
-<b><h3>Tetris</h3></b>
+<b><h1>Tetris</h1></b>
 
 <p>
 The game of Tetris, written in C++ using SDL2. Primarily a personal programming exercise.  
@@ -18,13 +18,13 @@ It's almost what I'd consider "playable", just a bit more needs to be done.
 <h2>To Do</h2>
 <p>
 If my interest doesn't wane, I'll add
--actual graphics
--a little area to disply score and the next piece
--ability to drop the current piece down immediately
--high scores that persist after game is closed
--a title screen
--music
--ability to select speed, have it gradually increase just like in the real tetris
+*actual graphics
+*a little area to disply score and the next piece
+*ability to drop the current piece down immediately
+*high scores that persist after game is closed
+*a title screen
+*music
+*ability to select speed, have it gradually increase just like in the real tetris
 </p>
 
 <h2>Compilation</h2>
