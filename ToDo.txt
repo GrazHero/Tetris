@@ -1,4 +1,0 @@
--make a score system
--make speed gradually increase
--make a gui where the next piece can be previewed
--make a lose state
