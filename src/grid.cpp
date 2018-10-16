@@ -58,26 +58,39 @@ void Click(const SDL_MouseButtonEvent event)
 
 BlockType CheckCell(int x, int y)
 {
-  return BlockArray[x+y*gridwidth];
+  BlockType i = BlockArray[x+y*gridwidth];
+  if(i > BLOCKTYPE_MAX)
+    return EMPTY;
+
+  return i;
 }
 
-void GridFill(BlockType type)
+void GridFill(BlockType type, bool Cosmetic)
 {
   for(int i = 0; i < gridheight*gridwidth; ++i)
   {
-    BlockArray[i] = type;
+    BlockType* b = &(BlockArray[i]);
+    if(Cosmetic)
+    {
+      if(*b == EMPTY || *b >= BLOCKTYPE_MAX) *b = type;
+    }
+    else *b = type;
   }
 }
 
-void RowFill(int row, BlockType type)
+void RowFill(int row, BlockType type, bool Cosmetic)
 {
   for(int i = 0; i < gridwidth; ++i)
   {
-    SetCell(i, row, type);
+    BlockType b = BlockArray[i+row*gridwidth];
+    if(Cosmetic)
+    {
+      if(b == EMPTY || b >= BLOCKTYPE_MAX) SetCell(i, row, type);
+    }
+    else SetCell(i, row, type);
   }
 }
-
-void DiagonalFill(int row, BlockType type)
+void DiagonalFill(int row, BlockType type, bool Cosmetic)
 {
   ///row is a number between 0 and gridwidth+gridheight-1
   ///starting in the top left corner, going all the way down
@@ -108,7 +121,14 @@ void DiagonalFill(int row, BlockType type)
 
   for(int i = 0; i <= distance; ++i)
   {
-    SetCell(x,row-i, type);
+    BlockType b = BlockArray[x+(row-i)*gridwidth];
+    if(Cosmetic)
+    {
+      if(b == EMPTY || b >= BLOCKTYPE_MAX) SetCell(x,row-i, type);
+    }
+    else SetCell(x, row-i, type);
+
     ++x;
   }
 }
+

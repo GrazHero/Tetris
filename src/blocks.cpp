@@ -86,7 +86,7 @@ void DrawBlocks()
             //printf("testrect: %d, %d, %d, %d\n", testrect.x, testrect.y, testrect.w, testrect.h);
             //printf("blockrect: %d, %d, %d, %d\n", blockrect.x, blockrect.y, blockrect.w, blockrect.h);
         }
-        SDL_RenderFillRect(MainRenderer, &blockrect);
+        if(BlockArray[i] != EMPTY)SDL_RenderFillRect(MainRenderer, &blockrect);
         //Move X and Y
         ++x;
         if((i+1)%gridwidth==0)
@@ -106,7 +106,8 @@ void PlaceBlockWithMouse(int x, int y)
     int gridy = floor(y/cellsize);
 
     BlockType type = BlockType(rand() % (BLOCKTYPE_MAX-1)+1);
-    SetCell(gridx, gridy, type);
+    BlockType cell = CheckCell(gridx, gridy);
+    printf("%d\n", cell);
 }
 
 void ClearRow(int y)

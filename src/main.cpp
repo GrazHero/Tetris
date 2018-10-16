@@ -14,6 +14,7 @@
 #include <ctime>
 #include <cmath>
 #include <cstdlib>
+#include <iostream>
 
 ///These get defined in their respective source files. no reason to do it here.
 //SDL_Window* MainWindow;
@@ -27,7 +28,8 @@ int main(int argc, char** argv)
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
       return -1;
     MainWindow = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowwidth, windowheight, SDL_WINDOW_SHOWN);
-    SDL_SysWMinfo* MainWindowInfo;
+    SDL_SysWMinfo info;
+    MainWindowInfo = &info;
 
     SDL_VERSION(&(MainWindowInfo->version));
     SDL_GetWindowWMInfo(MainWindow, MainWindowInfo);
@@ -56,11 +58,11 @@ int main(int argc, char** argv)
         CalculateTime();
     }
 
+    delete[] BlockArray;
 
     SDL_DestroyRenderer(MainRenderer);
     SDL_DestroyWindow(MainWindow);
-    SDL_Quit();
 EOP:
-    delete[] BlockArray;
+    SDL_Quit();
     return 0;
 }

@@ -2,6 +2,8 @@
 #include "window.hpp"
 #include "grid.hpp"
 #include "blocks.hpp"
+#include "graph.hpp"
+#include "coloreffects.hpp"
 #include <cstdio>
 
 SDL_Renderer* MainRenderer;

@@ -3,6 +3,9 @@
 #include "timing.hpp"
 #include "grid.hpp"
 #include "blocks.hpp"
+#include "coloreffects.hpp"
+#include "graph.hpp"
+
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -20,6 +23,8 @@ int RowsCleared = 0;
 bool Lose = false;
 float RealSpeed = 1000.0/(0.5*GameSpeed);//the threshhold of milliseconds before moving the block down
 float lastms = 0;
+
+
 
 void TestPiece()
 {
@@ -47,6 +52,7 @@ void Update()
   {               // but i'm not sticking to one style for this game, I want to try everything
     if(!Lose)
     {
+      Color_DiagonalCosScaleTopLeft();
       if(mscount - lastms >= RealSpeed)
       {
         lastms = mscount;
@@ -58,13 +64,13 @@ void Update()
           delete CurrentPiece;
 
           CheckLines();
-
           CurrentPiece = NextPiece;
           NextPiece = new Piece(piece, color);
           if(!CurrentPiece->Spawn())//if it returns 0, that means it tried spawning on top of another piece.
           {                         //in other words, begin the lose state
             Lose = true;
-            GridFill((BlockType)0xFF0000);
+            GridFill(EMPTY, false);
+
             CurrentPiece = nullptr;
           }//
         }//if(!CurrentPiece->Move(0, 1))
@@ -74,12 +80,7 @@ void Update()
     {
       //Put Lose State stuff here
       //Maybe move it to a different file later if it gets too big
-      for(int i = 0; i < gridheight+gridwidth; ++i)
-      {
-        int red = 0x7F - floor(50*sin(mscount/(500)-i));
-        int green = 0x7f;//finish this. i want to make the color interpolate between red green and blue
-        DiagonalFill(i, (BlockType)(red<<16));
-      }
+      Color_HorizontalRedScrollUp();
     }
   }//if(!GamePaused)
 }
@@ -95,6 +96,7 @@ if(!GamePaused)
       GameSpeed = amount;
       RealSpeed = 1000.0/(0.5*GameSpeed);
       Speeding = true;
+      int s;
     }
     if(Speeding && !speed)
     {
