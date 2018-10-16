@@ -11,6 +11,8 @@
 
 #endif // defined
 
+#include "text.hpp"
+
 void QuitGame()
 {
 
@@ -28,7 +30,6 @@ void LoseGame()
 {
     Lose = true;
     GridFill((BlockType)0xFF0000, false);
-
 
     CurrentPiece = nullptr;
 }
