@@ -3,6 +3,7 @@
 #include "window.hpp"
 #include "blocks.hpp"
 #include <cstdio>
+#include <cmath>
 
 const int cellsize = 30;
 const int gridwidth = windowwidth/cellsize;
@@ -58,4 +59,56 @@ void Click(const SDL_MouseButtonEvent event)
 BlockType CheckCell(int x, int y)
 {
   return BlockArray[x+y*gridwidth];
+}
+
+void GridFill(BlockType type)
+{
+  for(int i = 0; i < gridheight*gridwidth; ++i)
+  {
+    BlockArray[i] = type;
+  }
+}
+
+void RowFill(int row, BlockType type)
+{
+  for(int i = 0; i < gridwidth; ++i)
+  {
+    SetCell(i, row, type);
+  }
+}
+
+void DiagonalFill(int row, BlockType type)
+{
+  ///row is a number between 0 and gridwidth+gridheight-1
+  ///starting in the top left corner, going all the way down
+  ///then going all the way right
+  int distance;
+  int x;
+  if(row >= 0 && row < gridwidth-1)
+    distance = row;
+  else if(row >= gridwidth-1 && row < gridheight)
+    distance = gridwidth-1;
+  else
+    distance = gridwidth-2-(row-gridheight);
+
+ if(row<gridheight)
+    x = 0;
+  else
+  {
+    x = row-(gridheight-1);
+    row = gridheight-1;
+    /* clamping the row value to gridheight-1
+     * we don't need it for any more calculations except
+     * for SetCell, which will look for a y value on the grid,
+     * not something within this weird width+height indexing thing
+     * we have going on. Setting it like this is fine since we don't
+     * need its real value again for the rest of the function
+     * and it saves us needing to make and another variable for y */
+  }
+
+  for(int i = 0; i <= distance; ++i)
+  {
+    SetCell(x,row-i, type);
+    ++x;
+  }
 }

@@ -30,7 +30,7 @@ public:
   Piece(PieceType type, BlockType color) : m_type(type), m_color(color), m_rotation(0) {};
   int Move(int xdir, int ydir);
   int Rotate(int dir);
-  void Spawn();
+  int Spawn();
   void PrintClaimed();
   void SetAllCells();
   int CheckClaimed(int x, int y);

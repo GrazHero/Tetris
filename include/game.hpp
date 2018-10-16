@@ -14,6 +14,9 @@ extern Piece* NextPiece;
 extern int GameSpeed;
 extern bool GamePaused;
 extern float RealSpeed;
+extern int RowsCleared;
+extern int TotalScore;
+extern bool Lose;
 
 
 #endif // GAME_HPP

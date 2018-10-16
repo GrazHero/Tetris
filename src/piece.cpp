@@ -44,16 +44,20 @@ unsigned char piece_i[] = {
 
 void Piece::SetOrigin(unsigned char& orig, int x)
 {
-    printf("original origin: %d\n", orig);
+    //printf("original origin: %d\n", orig);
     orig = (0b10000000 >> x);
     //printf("new origin: %d\n", orig);
 }
 
-void Piece::Spawn()
+//fun, time to try/catch every vector function
+int Piece::Spawn()
 {
     ClaimedCells.reserve(9);
 
+
     unsigned char origin = 0b00000000; // for offsetting the piece on the grid
+
+    m_centerIndex = 0;
 
     unsigned char* actualpiece; // will point to one of the global hard coded pieces
 
@@ -71,6 +75,7 @@ void Piece::Spawn()
     case PIECE_B:
         SetOrigin(origin, 4);
         actualpiece = piece_b;
+        m_centerOffset = {0, 0};
         break;
     case PIECE_S:
         SetOrigin(origin, 3);
@@ -85,12 +90,12 @@ void Piece::Spawn()
     case PIECE_L:
         SetOrigin(origin, 3);
         actualpiece = piece_l;
-        m_centerOffset = {4, 1};
+        m_centerOffset = {3, 1};
         break;
     case PIECE_RL:
         SetOrigin(origin, 3);
         actualpiece = piece_rl;
-        m_centerOffset = {2, 1};
+        m_centerOffset = {3, 1};
         break;
     case PIECE_I:
         SetOrigin(origin, 4);
@@ -126,17 +131,39 @@ void Piece::Spawn()
         if(result != 0) //if the current bit is 1
         {
           int x = (gridwidth/2)-neworigin+j;
-          SetCell(x, i, m_color);
+          if(!CheckCell(x, i))
+             SetCell(x, i, m_color);
+          else return 0;
+
           ClaimCell(x, i);
+
           if(j == m_centerOffset.x && i == m_centerOffset.y)
           {
-            m_centerIndex = ClaimedCells.size() -1;//the distance from the front of the vectorwhere the "center piece" is
+            m_centerIndex = ClaimedCells.size() -1;//the distance from the back of the vectorwhere the "center piece" is
           }
           //printf("%d, %d, %d\n", gridwidth/2, neworigin, j);
         }
       }
     }
-    m_centerCell = &ClaimedCells.at(m_centerIndex);
+    try
+    {
+    m_centerCell = &ClaimedCells.at(ClaimedCells.size()-1-m_centerIndex);
+    }
+    catch(...)
+    {
+      /* Found the error. Turns out I was neglecting to define the m_centerOffset variable for the 4x4 pieces.
+       * I thought it was unnecessary because I don't need to rotate them. Turns out I was later using that
+       * variable irresponsibly as an argument to ClaimedCells.at(). I never initialize it for 4x4 blocks,
+       * so it was essentially using a garbage number as an index for the vector. Then it would throw an
+       * out of range exception basically every time a 4x4 block spawned. Weird how it only crashes the program
+       * selectively. GDB seems to catch this exception all the time, and then unhelpfully terminates the program.
+       * Glad I got that sorted out. Never EVER leave variables uninitialized. */
+      std::cerr << "last m_centercell\n";
+      std::cerr << "index is " << m_centerIndex << "\n";
+      std::cerr << "size is " << ClaimedCells.size() << "\n";
+    }
+
+    return 1;
 }
 
 void Piece::ClaimCell(int x, int y)
@@ -144,13 +171,15 @@ void Piece::ClaimCell(int x, int y)
   SDL_Point point;
   point.x = x;
   point.y = y;
+
   ClaimedCells.insert(ClaimedCells.begin(), point);
-  //printf("point x: %d\n", (ClaimedCells.begin())->x);
+
 }
 
 ///Returns 1 if the piece is moved successfully, 0 if there's something in the way
 int Piece::Move(int xdir, int ydir)
 {
+
   //check if we're gonna hit something
   for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
   {
@@ -158,7 +187,7 @@ int Piece::Move(int xdir, int ydir)
     int nexty = (*it).y+ydir;
     if(nextx >= gridwidth || nextx < 0 || nexty >= gridheight || nexty < 0)
       return 0;
-    else if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
+    if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
       return 0;
   }
 
@@ -194,7 +223,7 @@ void Piece::PrintClaimed()
 {
   for(auto it = ClaimedCells.begin(); it != ClaimedCells.end(); ++it)
   {
-    printf("\nx = %d, y = %d", (*it).x, (*it).y);
+    //printf("\nx = %d, y = %d", (*it).x, (*it).y);
   }
   printf("\n");
 }
@@ -218,38 +247,48 @@ int Piece::Rotate(int dir) //dir = 1 for counterclockwise, -1 for clockwise. ret
   for(int i = 0; i < originalSize; ++i) //using iterators would just make this harder
   {
     /* In hindsight, I could have done this like I did the Piece::Move() function.*/
-    int cellx = ClaimedCells.at(i+inserts).x;
-    int celly = ClaimedCells.at(i+inserts).y;
+
+    //Reading back to front so the rotated blocks get loaded in the original order
+    int cellx, celly;
+
+    cellx = ClaimedCells.at(ClaimedCells.size()-1-i).x;
+    celly = ClaimedCells.at(ClaimedCells.size()-1-i).y;
 
     int xdifference, ydifference, nextx, nexty;
     xdifference = cellx - m_centerCell->x;
     ydifference = celly - m_centerCell->y;
-    nextx = m_centerCell->x + ydifference;
-    nexty = m_centerCell->y - xdifference;
+    nextx = m_centerCell->x + dir*ydifference;
+    nexty = m_centerCell->y - dir*xdifference;
 
+
+    //There's a problem with this
     if(nextx >= gridwidth || nextx < 0 || nexty >= gridheight || nexty < 0)
       goto _RESTORE; // goto :^)
-    else if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
+    if(CheckCell(nextx, nexty) != EMPTY && !CheckClaimed(nextx, nexty))
       goto _RESTORE;
 
 
 
 
     SDL_Point p = {nextx, nexty};
+    //std::cout << "before: " << m_centerCell->x <<std::endl;
     ClaimedCells.insert(ClaimedCells.begin(), p);
     ++inserts;
-    m_centerCell = &ClaimedCells.at(m_centerIndex+inserts);//Set this again since vector::insert will invalidate it
+    m_centerCell = &ClaimedCells.at(ClaimedCells.size()-1-m_centerIndex);//Set this again since vector::insert will invalidate it
+    //std::cout << "after: " << m_centerCell->x <<std::endl;
   }
   //if we rotated without error, resize the array to truncate the old values, then clean them off of the global grid array
   ClearCells();
   ClaimedCells.resize(4);
   SetAllCells();
-  m_centerCell = &ClaimedCells.at(m_centerIndex);
+  m_centerCell = &ClaimedCells.at(ClaimedCells.size()-1-m_centerIndex);
+  //std::cout << m_centerIndex << std::endl;
   return 1;
 _RESTORE:
   //if we ran into a problem, we need to undo what we did to the vector
-  if(inserts > 0) ClaimedCells.erase(ClaimedCells.begin(), ClaimedCells.begin()+inserts+1);
-  m_centerCell = &ClaimedCells.at(m_centerIndex);
+  if(inserts > 0) ClaimedCells.erase(ClaimedCells.begin(), ClaimedCells.begin()+inserts);
+  m_centerCell = &ClaimedCells.at(ClaimedCells.size()-1-m_centerIndex);
+  //std::cout << "_RESTORE\n";
   return 0;
 }
 

@@ -29,19 +29,19 @@ int HandleEvents()
                 SpeedUp(true, 20);
                 break;
             case SDL_SCANCODE_LEFT:
-                CurrentPiece->Move(-1, 0);
+                if(CurrentPiece!=nullptr)CurrentPiece->Move(-1, 0);
                 break;
             case SDL_SCANCODE_RIGHT:
-                CurrentPiece->Move(1, 0);
+                if(CurrentPiece!=nullptr)CurrentPiece->Move(1, 0);
                 break;
             case SDL_SCANCODE_Z:
-                CurrentPiece->Rotate(1);
+                if(CurrentPiece!=nullptr)CurrentPiece->Rotate(-1);
                 break;
             case SDL_SCANCODE_X:
-                CurrentPiece->Rotate(-1);
+                if(CurrentPiece!=nullptr)CurrentPiece->Rotate(1);
                 break;
             case SDL_SCANCODE_B:
-                CurrentPiece->PrintClaimed();
+                if(CurrentPiece!=nullptr)CurrentPiece->PrintClaimed();
                 break;
             }
         }
@@ -54,6 +54,9 @@ int HandleEvents()
                 break;
             case SDL_SCANCODE_P:
                 TogglePause();
+                break;
+            case SDL_SCANCODE_L:
+                Lose = true;
                 break;
             }
         }
