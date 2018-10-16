@@ -3,5 +3,6 @@
 
 extern void QuitGame();
 extern void Killswitch(const char*);
+extern void LoseGame();
 
 #endif // QUIT_HPP

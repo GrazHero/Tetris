@@ -1,6 +1,8 @@
 #include "quit.hpp"
 #include "main.hpp"
 #include "window.hpp"
+#include "game.hpp"
+#include "grid.hpp"
 #include <cstdlib>
 
 #ifdef WINDOWS_COMPILE
@@ -20,4 +22,13 @@ void Killswitch(const char* errmsg)
   MessageBox(MainWindowHandle,errmsg,NULL,NULL);
   #endif
   exit(-1);
+}
+
+void LoseGame()
+{
+    Lose = true;
+    GridFill((BlockType)0xFF0000, false);
+
+
+    CurrentPiece = nullptr;
 }

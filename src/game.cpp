@@ -5,6 +5,7 @@
 #include "blocks.hpp"
 #include "coloreffects.hpp"
 #include "graph.hpp"
+#include "quit.hpp"
 
 #include <cstdlib>
 #include <cstdio>
@@ -68,10 +69,7 @@ void Update()
           NextPiece = new Piece(piece, color);
           if(!CurrentPiece->Spawn())//if it returns 0, that means it tried spawning on top of another piece.
           {                         //in other words, begin the lose state
-            Lose = true;
-            GridFill(EMPTY, false);
-
-            CurrentPiece = nullptr;
+            LoseGame();
           }//
         }//if(!CurrentPiece->Move(0, 1))
       }//if(mscount - lastms >= RealSpeed)
@@ -80,7 +78,8 @@ void Update()
     {
       //Put Lose State stuff here
       //Maybe move it to a different file later if it gets too big
-      Color_HorizontalRedScrollUp();
+      Color_DoubleCheckerBoard();
+      //DiagonalFill(14, PURPLE);
     }
   }//if(!GamePaused)
 }

@@ -19,7 +19,7 @@ int HandleEvents()
                 return 1; //this will break us from the main loop since returning 1 will set the loop var to false
                 break;
             case SDL_SCANCODE_SPACE:
-                //Killswitch("Don't press space, idiot");
+                Killswitch("Don't press space, idiot");
                 //CurrentPiece->CheckClaimed(5, 10);
                 break;
             case SDL_SCANCODE_UP:
@@ -56,7 +56,7 @@ int HandleEvents()
                 TogglePause();
                 break;
             case SDL_SCANCODE_L:
-                Lose = true;
+                LoseGame();
                 break;
             }
         }

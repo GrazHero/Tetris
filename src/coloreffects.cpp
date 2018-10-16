@@ -123,6 +123,7 @@ void Color_HorizontalScrollDown()
 
 void Color_HorizontalRedScrollUp()
 {
+///causes a segfault, fix it
   for(int i = 0; i < gridheight+gridwidth; ++i)
   {
     int red = (0x9F - floor(100*sin(mscount/(400)+i)));
