@@ -1,5 +1,9 @@
-<b><h1>Tetris</h1></b>
 
+
+<h1>DISCLAIMER</h1>
+<p>This project is basically completely unsalvageable. Development is not likely to continue. The following Readme is innaccurate. This program will segfault unless compiled with g++ with debugging symbols.</p>
+
+<h1>Tetris</h1>
 <p>
 The game of Tetris, written in C++ using SDL2. Primarily a personal programming exercise.  
 </p>
@@ -21,7 +25,7 @@ If my interest doesn't wane, I'll add
 
 * actual graphics
 * a little area to disply score and the next piece
-* ability to drop the current piece down immediately
+* ability to drop the current piece down immediate
 * high scores that persist after game is closed
 * a title screen
 * music
